@@ -24,26 +24,28 @@
       top: 0; left: 0;
       width: 100%;
       height: 100%;
-      background-color: #000;
+      background-color: rgba(40, 40, 40, 0.85);
       display: flex;
       justify-content: center;
       align-items: center;
       z-index: 10;
       transition: opacity 1s ease;
-    }
-    .enter-btn {
-      font-size: 1.5rem;
-      padding: 16px 32px;
-      border: 2px solid #fff;
-      border-radius: 12px;
-      background: none;
-      color: #fff;
       cursor: pointer;
-      transition: background 0.3s;
     }
-    .enter-btn:hover {
-      background: #fff;
-      color: #000;
+    .enter-text {
+      font-size: 2.5rem;
+      color: #ccc;
+      text-align: center;
+      padding: 20px 40px;
+      border: 2px solid #999;
+      border-radius: 16px;
+      transition: all 0.3s ease;
+      user-select: none;
+    }
+    .overlay:hover .enter-text {
+      color: #fff;
+      border-color: #fff;
+      text-shadow: 0 0 10px #fff;
     }
     .main-content {
       display: flex;
@@ -106,17 +108,20 @@
     }
     .play-btn {
       color: #fff;
-      background: none;
-      border: 1px solid #fff;
-      padding: 8px 16px;
-      border-radius: 8px;
+      background: #222;
+      border: none;
+      padding: 10px 24px;
+      border-radius: 30px;
       cursor: pointer;
       font-weight: bold;
-      transition: background 0.3s;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+      box-shadow: 0 0 8px rgba(255, 255, 255, 0.1);
     }
     .play-btn:hover {
       background: #fff;
       color: #000;
+      box-shadow: 0 0 15px #fff;
     }
     canvas {
       position: fixed;
@@ -129,8 +134,8 @@
 </head>
 <body>
 
-  <div class="overlay" id="overlay">
-    <button class="enter-btn" onclick="enterSite()">Enter</button>
+  <div class="overlay" id="overlay" onclick="enterSite()">
+    <div class="enter-text">Enter</div>
   </div>
 
   <div class="main-content" id="mainContent">
