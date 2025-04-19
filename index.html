@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Plein</title>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Mono&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
   <style>
     * {
       margin: 0;
@@ -14,7 +14,7 @@
     body {
       background-color: #000;
       color: #fff;
-      font-family: 'Space Mono', monospace;
+      font-family: 'Inter', sans-serif;
       height: 100vh;
       overflow: hidden;
       position: relative;
@@ -24,7 +24,7 @@
       top: 0; left: 0;
       width: 100%;
       height: 100%;
-      background-color: rgba(40, 40, 40, 0.6); /* reduced opacity */
+      background-color: rgba(40, 40, 40, 0.85);
       display: flex;
       justify-content: center;
       align-items: center;
@@ -33,15 +33,14 @@
       cursor: pointer;
     }
     .enter-text {
-      font-size: 2rem;
+      font-size: 2.5rem;
       color: #ccc;
       text-align: center;
       padding: 20px 40px;
-      border: 1px solid #666;
-      border-radius: 12px;
+      border: 2px solid #999;
+      border-radius: 16px;
       transition: all 0.3s ease;
       user-select: none;
-      background: rgba(0,0,0,0.4);
     }
     .overlay:hover .enter-text {
       color: #fff;
@@ -107,6 +106,23 @@
       background: #fff;
       color: #000;
     }
+    .play-btn {
+      color: #fff;
+      background: #222;
+      border: none;
+      padding: 10px 24px;
+      border-radius: 30px;
+      cursor: pointer;
+      font-weight: bold;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+      box-shadow: 0 0 8px rgba(255, 255, 255, 0.1);
+    }
+    .play-btn:hover {
+      background: #fff;
+      color: #000;
+      box-shadow: 0 0 15px #fff;
+    }
     canvas {
       position: fixed;
       top: 0;
@@ -119,7 +135,7 @@
 <body>
 
   <div class="overlay" id="overlay" onclick="enterSite()">
-    <div class="enter-text">Click to Enter</div>
+    <div class="enter-text">Enter</div>
   </div>
 
   <div class="main-content" id="mainContent">
@@ -131,6 +147,7 @@
         <a href="https://t.me/pleinmm" target="_blank">Click here</a>
       </div>
     </div>
+    <button class="play-btn" onclick="toggleMusic()">Play / Pause Music</button>
   </div>
 
   <canvas id="rain-canvas"></canvas>
@@ -163,7 +180,7 @@
         this.alpha -= 0.02;
       }
       draw() {
-        ctx.strokeStyle = `rgba(255,255,255,${this.alpha})`;
+        ctx.strokeStyle = rgba(255,255,255,${this.alpha});
         ctx.beginPath();
         ctx.moveTo(this.x, this.y);
         ctx.lineTo(this.x, this.y + this.length);
@@ -200,6 +217,14 @@
         animateRain();
         window.addEventListener('mousemove', spawnRain);
       }, 1000);
+    }
+
+    function toggleMusic() {
+      if (music.paused) {
+        music.play();
+      } else {
+        music.pause();
+      }
     }
 
     window.addEventListener('resize', () => {
