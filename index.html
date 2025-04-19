@@ -15,11 +15,49 @@
       background-color: #000;
       color: #fff;
       font-family: 'Inter', sans-serif;
+      height: 100vh;
+      overflow: hidden;
+    }
+    .overlay {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: #000;
       display: flex;
       justify-content: center;
       align-items: center;
-      height: 100vh;
+      z-index: 10;
+      transition: opacity 1s ease;
+    }
+    .enter-btn {
+      font-size: 1.5rem;
+      padding: 16px 32px;
+      border: 2px solid #fff;
+      border-radius: 12px;
+      background: none;
+      color: #fff;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    .enter-btn:hover {
+      background: #fff;
+      color: #000;
+    }
+
+    .main-content {
+      display: flex;
+      justify-content: center;
+      align-items: center;
       flex-direction: column;
+      height: 100%;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 1s ease;
+    }
+    .main-content.active {
+      opacity: 1;
+      pointer-events: auto;
     }
     .card {
       border: 1px solid #444;
@@ -81,15 +119,23 @@
   </style>
 </head>
 <body>
-  <div class="card">
-    <img src="assets/plein-modified.png" alt="Plein's photo">
-    <div class="name">Plein</div>
-    <div class="bio">white and proud</div>
-    <div class="link">
-      <a href="https://t.me/pleinmm" target="_blank">Click here</a>
-    </div>
+
+  <div class="overlay" id="overlay">
+    <button class="enter-btn" onclick="enterSite()">Enter</button>
   </div>
-  <button class="play-btn" onclick="toggleMusic()">Play / Pause Music</button>
+
+  <div class="main-content" id="mainContent">
+    <div class="card">
+      <img src="assets/plein-modified.png" alt="Plein's photo">
+      <div class="name">Plein</div>
+      <div class="bio">white and proud</div>
+      <div class="link">
+        <a href="https://t.me/pleinmm" target="_blank">Click here</a>
+      </div>
+    </div>
+    <button class="play-btn" onclick="toggleMusic()">Play / Pause Music</button>
+  </div>
+
   <audio id="bg-music" loop>
     <source src="assets/test.mp3" type="audio/mpeg">
     Your browser does not support the audio element.
@@ -97,6 +143,18 @@
 
   <script>
     const music = document.getElementById('bg-music');
+    const overlay = document.getElementById('overlay');
+    const mainContent = document.getElementById('mainContent');
+
+    function enterSite() {
+      overlay.style.opacity = 0;
+      setTimeout(() => {
+        overlay.style.display = 'none';
+        mainContent.classList.add('active');
+        music.play();
+      }, 1000);
+    }
+
     function toggleMusic() {
       if (music.paused) {
         music.play();
@@ -105,5 +163,6 @@
       }
     }
   </script>
+
 </body>
 </html>
