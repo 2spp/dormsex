@@ -19,6 +19,7 @@
       justify-content: center;
       align-items: center;
       height: 100vh;
+      flex-direction: column;
     }
     .card {
       border: 1px solid #444;
@@ -28,6 +29,7 @@
       background: #111;
       width: 300px;
       box-shadow: 0 0 20px rgba(255, 255, 255, 0.05);
+      margin-bottom: 20px;
     }
     .card img {
       width: 120px;
@@ -55,8 +57,24 @@
       padding: 8px 16px;
       border-radius: 8px;
       transition: background 0.3s;
+      display: inline-block;
+      margin-bottom: 10px;
     }
     .link a:hover {
+      background: #fff;
+      color: #000;
+    }
+    .play-btn {
+      color: #fff;
+      background: none;
+      border: 1px solid #fff;
+      padding: 8px 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: background 0.3s;
+    }
+    .play-btn:hover {
       background: #fff;
       color: #000;
     }
@@ -66,10 +84,26 @@
   <div class="card">
     <img src="assets/plein-modified.png" alt="Plein's photo">
     <div class="name">Plein</div>
-    <div class="bio">White and proud</div>
+    <div class="bio">white and proud</div>
     <div class="link">
-      <a href="https://t.me/pleinmm" target="_blank">t.me/pleinmm</a>
+      <a href="https://t.me/pleinmm" target="_blank">Click here</a>
     </div>
   </div>
+  <button class="play-btn" onclick="toggleMusic()">Play / Pause Music</button>
+  <audio id="bg-music" loop>
+    <source src="assets/song.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+  </audio>
+
+  <script>
+    const music = document.getElementById('bg-music');
+    function toggleMusic() {
+      if (music.paused) {
+        music.play();
+      } else {
+        music.pause();
+      }
+    }
+  </script>
 </body>
 </html>
