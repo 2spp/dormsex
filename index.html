@@ -17,6 +17,7 @@
       font-family: 'Inter', sans-serif;
       height: 100vh;
       overflow: hidden;
+      position: relative;
     }
     .overlay {
       position: fixed;
@@ -44,7 +45,6 @@
       background: #fff;
       color: #000;
     }
-
     .main-content {
       display: flex;
       justify-content: center;
@@ -54,6 +54,8 @@
       opacity: 0;
       pointer-events: none;
       transition: opacity 1s ease;
+      position: relative;
+      z-index: 5;
     }
     .main-content.active {
       opacity: 1;
@@ -116,6 +118,13 @@
       background: #fff;
       color: #000;
     }
+    canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      pointer-events: none;
+      z-index: 1;
+    }
   </style>
 </head>
 <body>
@@ -128,13 +137,15 @@
     <div class="card">
       <img src="assets/plein-modified.png" alt="Plein's photo">
       <div class="name">Plein</div>
-      <div class="bio">White and proud</div>
+      <div class="bio">white and proud</div>
       <div class="link">
         <a href="https://t.me/pleinmm" target="_blank">Click here</a>
       </div>
     </div>
     <button class="play-btn" onclick="toggleMusic()">Play / Pause Music</button>
   </div>
+
+  <canvas id="rain-canvas"></canvas>
 
   <audio id="bg-music" loop>
     <source src="assets/test.mp3" type="audio/mpeg">
@@ -145,6 +156,50 @@
     const music = document.getElementById('bg-music');
     const overlay = document.getElementById('overlay');
     const mainContent = document.getElementById('mainContent');
+    const canvas = document.getElementById('rain-canvas');
+    const ctx = canvas.getContext('2d');
+
+    let mouse = { x: window.innerWidth / 2, y: window.innerHeight / 2 };
+    let particles = [];
+
+    class Particle {
+      constructor(x, y) {
+        this.x = x;
+        this.y = y;
+        this.length = Math.random() * 20 + 10;
+        this.speedY = Math.random() * 4 + 4;
+        this.alpha = 1;
+      }
+      update() {
+        this.y += this.speedY;
+        this.alpha -= 0.02;
+      }
+      draw() {
+        ctx.strokeStyle = `rgba(255,255,255,${this.alpha})`;
+        ctx.beginPath();
+        ctx.moveTo(this.x, this.y);
+        ctx.lineTo(this.x, this.y + this.length);
+        ctx.stroke();
+      }
+    }
+
+    function animateRain() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      particles.forEach((p, i) => {
+        p.update();
+        p.draw();
+        if (p.alpha <= 0) particles.splice(i, 1);
+      });
+      requestAnimationFrame(animateRain);
+    }
+
+    function spawnRain(e) {
+      mouse.x = e.clientX;
+      mouse.y = e.clientY;
+      for (let i = 0; i < 5; i++) {
+        particles.push(new Particle(mouse.x + (Math.random() - 0.5) * 40, mouse.y + (Math.random() - 0.5) * 40));
+      }
+    }
 
     function enterSite() {
       overlay.style.opacity = 0;
@@ -152,6 +207,10 @@
         overlay.style.display = 'none';
         mainContent.classList.add('active');
         music.play();
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        animateRain();
+        window.addEventListener('mousemove', spawnRain);
       }, 1000);
     }
 
@@ -162,7 +221,11 @@
         music.pause();
       }
     }
-  </script>
 
+    window.addEventListener('resize', () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    });
+  </script>
 </body>
 </html>
