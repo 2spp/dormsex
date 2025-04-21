@@ -164,6 +164,9 @@
     const canvas = document.getElementById('rain-canvas');
     const ctx = canvas.getContext('2d');
 
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
     let mouse = { x: window.innerWidth / 2, y: window.innerHeight / 2 };
     let particles = [];
 
@@ -180,7 +183,7 @@
         this.alpha -= 0.02;
       }
       draw() {
-        ctx.strokeStyle = rgba(255,255,255,${this.alpha});
+        ctx.strokeStyle = `rgba(255,255,255,${this.alpha})`;
         ctx.beginPath();
         ctx.moveTo(this.x, this.y);
         ctx.lineTo(this.x, this.y + this.length);
@@ -212,8 +215,6 @@
         overlay.style.display = 'none';
         mainContent.classList.add('active');
         music.play();
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
         animateRain();
         window.addEventListener('mousemove', spawnRain);
       }, 1000);
