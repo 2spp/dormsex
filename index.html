@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Seized</title>
- <script disable-devtool-auto="" src="https://cdn.jsdelivr.net/npm/disable-devtool"></script>
+  <script disable-devtool-auto="" src="https://cdn.jsdelivr.net/npm/disable-devtool"></script>
   <style>
     html, body {
       margin: 0;
@@ -12,9 +12,38 @@
       height: 100%;
       background: url('assets/operation-talent-seized-site.png') no-repeat center center fixed;
       background-size: cover;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    button {
+      padding: 15px 30px;
+      font-size: 20px;
+      font-weight: bold;
+      color: white;
+      background-color: #d32f2f;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.4);
+      transition: background 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #ff5252;
     }
   </style>
 </head>
 <body>
+  <button onclick="playAudio()">Number One Fan</button>
+  <audio id="fanAudio" src="daddydorm.mp3"></audio>
+
+  <script>
+    function playAudio() {
+      const audio = document.getElementById("fanAudio");
+      audio.play();
+    }
+  </script>
 </body>
 </html>
