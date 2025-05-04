@@ -1,47 +1,19 @@
-§<!DOCTYPE html>
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Seized</title>
   <style>
     html, body {
       margin: 0;
       padding: 0;
       height: 100%;
-      background-color: black;
-      color: red;
-      overflow: hidden;
-    }
-
-    #bgcov {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover; /* ensures it covers the screen */
-      z-index: -1; /* sends it behind the content */
-    }
-
-    #content {
-      position: relative;
-      z-index: 1;
-      padding: 2rem;
-    }
-
-    @media (min-width: 1920px) {
-      #content {
-        top: 143vh;
-      }
+      background: url('assets/operation-talent-seized-site.png') no-repeat center center fixed;
+      background-size: cover;
     }
   </style>
 </head>
 <body>
-
-  <img src="https://files.catbox.moe/xhchv2.png" id="bgcov" alt="background">
-
-  <div id="content">
-    <h1>FBI</h1>
-    <p></p>
-  </div>
-
 </body>
 </html>
