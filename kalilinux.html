@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kali Linux</title>
+  <style>
+    body {
+      background-color: #000;
+      color: #fff;
+      font-family: 'Courier New', Courier, monospace;
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+    }
+    
+    .terminal {
+      width: 80%;
+      max-width: 900px;
+      height: 80%;
+      border: 2px solid #333;
+      border-radius: 10px;
+      padding: 20px;
+      background-color: #111;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
+      overflow-y: auto;
+    }
+    
+    .terminal-output {
+      white-space: pre-wrap;
+      word-wrap: break-word;
+      font-size: 18px;
+    }
+
+    .prompt {
+      color: #fff;
+      display: inline;
+    }
+
+    .input-line {
+      display: inline;
+      width: 100%;
+    }
+
+    .input-line input {
+      background: transparent;
+      border: none;
+      color: #fff;
+      outline: none;
+      width: 100%;
+      font-size: 18px;
+      font-family: 'Courier New', Courier, monospace;
+    }
+    
+    .window-controls {
+      display: none;
+    }
+    
+  </style>
+</head>
+<body>
+  <div class="terminal">
+    <div class="terminal-output">
+      <div class="input-line">
+        <span class="prompt">root@kali:~$</span>
+        <input type="text" id="commandInput" placeholder="Type command..." autofocus />
+      </div>
+      <div id="outputArea"></div>
+    </div>
+  </div>
+
+  <script>
+    const inputField = document.getElementById("commandInput");
+    const outputArea = document.getElementById("outputArea");
+
+    // Simulate boot-up sequence
+    window.onload = () => {
+      simulateBoot();
+    };
+
+    inputField.addEventListener("keydown", function(event) {
+      if (event.key === "Enter") {
+        event.preventDefault();
+        const command = inputField.value.trim();
+        if (command) {
+          outputCommand(command);
+        }
+        inputField.value = "";
+      }
+    });
+
+    function outputCommand(command) {
+      const outputDiv = document.createElement("div");
+      outputDiv.classList.add("input-line");
+      outputDiv.innerHTML = `<span class="prompt">root@kali:~$</span> ${command}`;
+      outputArea.appendChild(outputDiv);
+
+      // Simulate output for commands
+      let response;
+      switch (command.toLowerCase()) {
+        case "clear":
+          outputArea.innerHTML = "";
+          break;
+        case "help":
+          response = "Available commands:\n- help: Show available commands\n- clear: Clear terminal\n- uname: Show system info\n- ls: List files\n- exit: Exit terminal";
+          break;
+        case "uname":
+          response = "Linux kali 5.10.0-kali9-amd64 #1 SMP Debian 5.10.25-1kali1 (2021-03-04) x86_64 GNU/Linux";
+          break;
+        case "ls":
+          response = "Documents  Downloads  Music  Pictures  Videos";
+          break;
+        case "exit":
+          response = "Session closed. Goodbye.";
+          setTimeout(() => {
+            window.close(); // Close window after exit
+          }, 1000);
+          break;
+        default:
+          response = `bash: ${command}: command not found`;
+          break;
+      }
+
+      if (response) {
+        const responseDiv = document.createElement("div");
+        responseDiv.classList.add("input-line");
+        responseDiv.textContent = response;
+        outputArea.appendChild(responseDiv);
+      }
+
+      // Scroll to the bottom of the terminal
+      outputArea.scrollTop = outputArea.scrollHeight;
+    }
+
+    function simulateBoot() {
+      const loadingMessages = [
+        "Initializing system...",
+        "Loading kernel...",
+        "Mounting file system...",
+        "Starting services...",
+        "Setting up network...",
+        "Boot complete. Type 'help' for a list of commands."
+      ];
+      
+      let delay = 0;
+
+      loadingMessages.forEach((message, index) => {
+        setTimeout(() => {
+          const outputDiv = document.createElement("div");
+          outputDiv.classList.add("input-line");
+          outputDiv.textContent = message;
+          outputArea.appendChild(outputDiv);
+
+          if (index === loadingMessages.length - 1) {
+            // Once boot completes, show the command prompt
+            setTimeout(() => {
+              const promptDiv = document.createElement("div");
+              promptDiv.classList.add("input-line");
+              promptDiv.innerHTML = `<span class="prompt">root@kali:~$</span> `;
+              outputArea.appendChild(promptDiv);
+            }, 500);
+          }
+
+          outputArea.scrollTop = outputArea.scrollHeight;
+        }, delay);
+
+        delay += 1000; // 1 second between messages
+      });
+    }
+  </script>
+</body>
+</html>
