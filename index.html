@@ -1,510 +1,167 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <script disable-devtool-auto="" src="https://cdn.jsdelivr.net/npm/disable-devtool"></script>
-  <title>Dorm nigger</title>
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box; 
-      user-select: none;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dorm</title>
+    <script disable-devtool-auto src="https://cdn.jsdelivr.net/npm/disable-devtool"></script>
+    <meta property="og:title" content="Dorm />
+    <meta property="og:description" content="Biolink for nigger dorm" />
+    <meta property="og:image" content="https://files.catbox.moe/3w8qjd.png" />
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            background-image: url('https://files.catbox.moe/g6epic.png');
+            background-size: cover;
+            background-position: center;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            position: relative; 
+        }
 
-    body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: url('https://files.catbox.moe/ip2hp5.png') no-repeat center center/cover;
-      height: 100vh;
-      overflow: hidden;
-    }
+        .container {
+            background: rgba(105, 105, 105, 0.226); /* Grey with opacity */
+            border-radius: 15px;
+            padding: 20px;
+            max-width: 600px; 
+            display: flex;
+            align-items: center;
+            text-align: left;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+            width: 100%;
+            opacity: 100%;
+        }
 
-    .login-screen {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      background: rgba(0, 0, 0, 0.8);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      z-index: 999;
-    }
+        .member-img {
+            width: 70px;
+            height: 70px;
+            border-radius: 40%;
+            margin-right: 10px;
+        }
 
-    .login-box {
-      background: #1e1e1e;
-      padding: 40px;
-      border-radius: 10px;
-      box-shadow: 0 0 15px rgba(0,0,0,0.6);
-      text-align: center;
-      color: white;
-    }
+        .name {
+            color: #f6f6ff;
+            text-shadow: 0 0 10px rgb(241, 241, 241), 0 0 20px rgb(253, 253, 253);
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
 
-    .login-box h3 {
-      margin-bottom: 20px;
-      font-size: 20px;
-    }
+        .links {
+            display: flex;
+            flex-direction: row;
+            gap: 10px;
+        }
 
-    .login-box select,
-    .login-box button {
-      padding: 10px 15px;
-      font-size: 14px;
-      margin: 5px;
-      border: none;
-      border-radius: 5px;
-    }
+        .link {
+            text-decoration: none;
+            font-size: 1.2rem;
+            color: white;
+            padding: 10px;
+            border-radius: 10px;
+            transition: background 0.3s;
+        }
 
-    .login-box select {
-      background: #333;
-      color: white;
-    }
+        .link:hover {
+            background: rgba(90, 90, 90, 0.7);
+        }
 
-    .login-box button {
-      background: #c0c0c0;
-      color: white;
-      cursor: pointer;
-    }
-
-    .login-box button:hover {
-      background: #595a5a;
-    }
-
-    .taskbar {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-      height: 40px;
-      background: rgba(51, 51, 51, 0.95);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      color: white;
-      padding: 0 15px;
-      font-size: 14px;
-      z-index: 10;
-    }
-
-    .start {
-      background: #333;
-      padding: 6px 12px;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-
-    .time {
-      font-family: monospace;
-    }
-
-    .desktop {
-      position: relative;
-      height: calc(100vh - 40px);
-      width: 100%;
-      display: flex;
-      flex-wrap: wrap;
-      align-content: flex-start;
-      padding: 20px;
-      gap: 20px;
-    }
-
-    .icon {
-      text-align: center;
-      color: white;
-      cursor: pointer;
-      width: 100px;
-      font-size: 14px;
-      text-shadow: 1px 1px 2px black;
-    }
-
-    .icon img {
-      width: 48px;
-      height: 48px;
-      filter: drop-shadow(1px 1px 2px black);
-    }
-
-    .icon span {
-      display: block;
-      margin-top: 5px;
-      font-size: 13px;
-    }
-
-    .window {
-      position: absolute;
-      top: 100px;
-      left: 100px;
-      width: 500px;
-      height: 300px;
-      background: #1e1e1e;
-      color: white;
-      border: 1px solid #555;
-      border-radius: 5px;
-      box-shadow: 0 0 20px rgba(0,0,0,0.5);
-      display: none;
-      flex-direction: column;
-      z-index: 100;
-    }
-
-    .window-header {
-      height: 30px;
-      background: #2d2d2d;
-      display: flex;
-      align-items: center;
-      padding: 0 10px;
-      cursor: move;
-      justify-content: space-between;
-      border-top-left-radius: 5px;
-      border-top-right-radius: 5px;
-    }
-
-    .window-controls {
-      display: flex;
-      gap: 6px;
-    }
-
-    .control {
-      width: 12px;
-      height: 12px;
-      border-radius: 50%;
-      background: gray;
-      cursor: pointer;
-    }
-
-    .control.close { background: #ff5c5c; }
-    .control.minimize { background: #ffbd4c; }
-    .control.maximize { background: #15a54f; }
-
-    .window-body {
-      flex-grow: 1;
-      padding: 10px;
-      overflow: auto;
-      font-family: monospace;
-    }
-
-    .terminal-output {
-      color: #00ff90;
-      white-space: pre-wrap;
-    }
-
-    .fake-browser-bar {
-      background: #444;
-      color: white;
-      padding: 5px 10px;
-      font-size: 13px;
-      border-top: 1px solid #555;
-    }
-
-    .fake-browser-body {
-      padding: 15px;
-      line-height: 1.6;
-      font-family: sans-serif;
-    }
-
-    .members-list {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      margin-top: 10px;
-    }
-
-    .member {
-      color: white;
-      padding: 10px;
-      border-radius: 5px;
-      cursor: pointer;
-      width: fit-content;
-      transition: background 0.3s;
-    }
-
-    .member:hover {
-      background: #555;
-    }
-
-    .member a {
-      color: #daece2;
-      text-decoration: none;
-    }
-
-    .music-player {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-
-    .music-player select {
-      width: 100%;
-      padding: 8px;
-      background: #333;
-      color: white;
-      border-radius: 5px;
-      border: none;
-    }
-
-    .music-player button {
-      background: #464747;
-      border: none;
-      padding: 8px;
-      color: white;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-
-    .music-player button:hover {
-      background: #424242;
-      opacity: 50%;   
-    }
-
-    .progress {
-      width: 100%;
-      height: 5px;
-      background: #555;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-
-    .progress-bar {
-      width: 0%;
-      height: 100%;
-      background: #e8f0eb;
-      border-radius: 5px;
-    }
-  </style>
+        /* Centered enter button */
+        #button {
+            color: rgb(167, 165, 165);
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 2rem;
+            border: none;
+            background: none;
+            cursor: pointer;
+            text-align: center;
+            padding: 15px 30px;
+            border-radius: 25px;
+            transition: background 0.3s;
+        }
+    </style>
 </head>
 <body>
 
-<div class="login-screen" id="loginScreen">
-  <div class="login-box">
-    <h3>Login to Instakill</h3>
-    <select id="loginSelect">
-      <option value="instakill">Instakill</option>
-    </select>
-    <br>
-    <button onclick="login()">Login</button>
-  </div>
-</div>
-
-<div class="desktop" id="desktop" style="display: none;">
-  <div class="icon" onclick="openWindow('terminal')">
-    <img src="https://files.catbox.moe/sbo6lb.png" />
-    <span>Kali - Linux</span>
-  </div>
-  <div class="icon" onclick="openWindow('browser')">
-    <img src="https://files.catbox.moe/3w8qjd.png" />
-    <span>Brave</span>
-  </div>
-  <div class="icon" onclick="openWindow('members')">
-    <img src="https://files.catbox.moe/zefi6t.png" />
-    <span>Instakill</span>
-  </div>
-  <div class="icon" onclick="openWindow('musicPlayer')">
-    <img src="https://files.catbox.moe/mf2b31.png" />
-    <span>Soundcloud</span>
-  </div>
-
-  <div class="window" id="terminal">
-    <div class="window-header" onmousedown="dragStart(event, this.parentElement)">
-      <span>Kali Linux</span>
-      <div class="window-controls">
-        <div class="control close" onclick="closeWindow('terminal')"></div>
-        <div class="control minimize"></div>
-        <div class="control maximize"></div>
-      </div>
-    </div>
-    <div class="window-body" style="padding: 0;">
-      <iframe src="kalilinux.html" style="width: 100%; height: 100%; border: none;"></iframe>
-    </div>
-    </div>
-  </div>
-
-  <div class="window" id="browser">
-    <div class="window-header" onmousedown="dragStart(event, this.parentElement)">
-      <span>Net</span>
-      <div class="window-controls">
-        <div class="control close" onclick="closeWindow('browser')"></div>
-        <div class="control minimize"></div>
-        <div class="control maximize"></div>
-      </div>
-    </div>
-    <div class="fake-browser-bar">https://doxbin.com/user/flanked</div>
-    <div class="fake-browser-body">
-      <h2>https://doxbin.com/upload/OliwerFuchsApedo</h2>
-      <p></p>
-    </div>
-  </div>
-
-  <div class="window" id="members">
-    <div class="window-header" onmousedown="dragStart(event, this.parentElement)">
-      <span>Members</span>
-      <div class="window-controls">
-        <div class="control close" onclick="closeWindow('members')"></div>
-        <div class="control minimize"></div>
-        <div class="control maximize"></div>
-      </div>
-    </div>
-    <div class="window-body">
-      <div class="members-list">
-        <div class="member">perk - <a href="https://t.me/discloser" target="_blank">t.me/perk</a></div>
-        <div class="member">net - <a href="https://t.me/longtermed" target="_blank">t.me/net</a></div>
-        <div class="member">dorm - <a href="https://t.me/coolnigga234" target="_blank">t.me/dorm</a></div>
-      </div>
-    </div>
-  </div>
-
-  <div class="window" id="musicPlayer">
-    <div class="window-header" onmousedown="dragStart(event, this.parentElement)">
-      <span>Soundcloud</span>
-      <div class="window-controls">
-        <div class="control close" onclick="closeWindow('musicPlayer')"></div>
-        <div class="control minimize"></div>
-        <div class="control maximize"></div>
-      </div>
-    </div>
-    <div class="window-body">
-      <div class="music-player">
-        <select id="songSelect" onchange="changeSong()">
-          <option value="0">intro - curse</option>
-          <option value="1">friends - elusin</option>
-          <option value="2">Elskling - elusin</option>
-        </select>
-        <span id="songInfo">intro - curse</span>
-        <button id="playPauseBtn" onclick="toggleMusic()">Play</button>
-        <div class="progress" onclick="setProgress(event)">
-          <div class="progress-bar" id="progressBar"></div>
+<div id="site" hidden>
+    <div class="container">
+        <img src="https://files.catbox.moe/dnllt2.jpg" alt="Member" class="member-img">
+        <div>
+            <div class="name">Dorm</div>
+            <div class="links">
+                <a href="https://t.me/coolnigga234" class="link" target="_blank">t.me/dorm</a>
+                <a href="https://doxbin.com/user/2sp" class="link" target="_blank">doxbin</a>
+                <a href="https://discord.gg/6rDnveY2" class="link" target="_blank">discord</a>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
 </div>
 
-<div class="taskbar">
-  <div class="start">Start</div>
-  <div class="time" id="clock">00:00</div>
-</div>
+<center>
+    <button id="button" onclick="playAudio();document.getElementById('button').hidden=true;document.getElementById('site').hidden=false;">
+        Enter
+    </button>
+</center>
 
 <script>
-  let musicPlaying = false;
-  let currentTime = 0;
-  let totalDuration = 180; // Default duration; this can be dynamic
-  let currentSongIndex = 0;
-  let progressInterval;
-  let audio = new Audio(); // Audio object to control playback
+  document.onkeydown = function(e) {
+    if (event.keyCode == 123) return false;
+    if (e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)) return false;
+    if (e.ctrlKey && e.shiftKey && e.keyCode == 'C'.charCodeAt(0)) return false;
+    if (e.ctrlKey && e.shiftKey && e.keyCode == 'J'.charCodeAt(0)) return false;
+    if (e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)) return false;
+  }
+  document.addEventListener('contextmenu', function(e) {
+    e.preventDefault();
+  });
 
-  // Songs array with Catbox links
-  const songs = [
-    { title: "Intro", artist: "curse", url: "https://files.catbox.moe/nuqvlx.mp3" },
-    { title: "Friends", artist: "elusin", url: "https://files.catbox.moe/hhzj6a.mp3" },
-    { title: "Elskling", artist: "elusin", url: "https://files.catbox.moe/h4a964.mp3" }
-  ];
-
-  // Toggle play/pause functionality
-  function toggleMusic() {
-    const playPauseBtn = document.getElementById('playPauseBtn');
-    if (musicPlaying) {
-      playPauseBtn.textContent = 'Play';
-      musicPlaying = false;
-      clearInterval(progressInterval);
-      audio.pause();
+  function playAudio() {
+    let myAudio = new Audio('https://files.catbox.moe/nuqvlx.mp3'); 
+    if (typeof myAudio.loop === 'boolean') {
+      myAudio.loop = true;
     } else {
-      playPauseBtn.textContent = 'Pause';
-      musicPlaying = true;
-      audio.play();
-      progressInterval = setInterval(() => {
-        if (currentTime < totalDuration) {
-          currentTime++;
-          updateProgress();
-        } else {
-          clearInterval(progressInterval);
-          musicPlaying = false;
-          document.getElementById('playPauseBtn').textContent = 'Play';
-        }
-      }, 1000);
+      myAudio.addEventListener('ended', function() {
+        this.currentTime = 0;
+      });
     }
+    myAudio.play();
   }
+  function enterSite() {
+  const overlay = document.getElementById('enterOverlay');
+  overlay.style.opacity = '0';
+  setTimeout(() => {
+    overlay.style.display = 'none';
+    document.getElementById('topLinks').style.display = 'block';
+  }, 500);
+}
 
-  // Update the progress bar based on the current time
-  function updateProgress() {
-    const progressBar = document.getElementById('progressBar');
-    progressBar.style.width = (currentTime / totalDuration) * 100 + '%';
+const staticSymbol = "@";
+const dynamicText = "Dorm | Plein";
+let typedText = "";
+let index = 0;
+
+function typeTitle() {
+  if (index < dynamicText.length) {
+    typedText += dynamicText.charAt(index);
+    document.title = staticSymbol + typedText;
+    index++;
+    setTimeout(typeTitle, 200);
+  } else if (typedText.length > 0) {
+    typedText = typedText.slice(0, typedText.length - 1);
+    document.title = staticSymbol + typedText;
+    setTimeout(typeTitle, 150);
+  } else {
+    index = 0;
+    setTimeout(typeTitle, 500);
   }
+}
 
-  // Allow users to click on the progress bar to jump to a specific time
-  function setProgress(event) {
-    const progress = event.target;
-    const offsetX = event.offsetX;
-    const width = progress.offsetWidth;
-    const clickPosition = (offsetX / width) * totalDuration;
-    currentTime = clickPosition;
-    updateProgress();
-    audio.currentTime = currentTime;
-  }
-
-  // Change song based on selection
-  function changeSong() {
-    const select = document.getElementById('songSelect');
-    currentSongIndex = parseInt(select.value);
-    const song = songs[currentSongIndex];
-    document.getElementById('songInfo').textContent = `${song.title} - ${song.artist}`;
-    currentTime = 0; // Reset current time
-    totalDuration = 180; // Update this if you want to set duration dynamically (using `audio.duration` after loading)
-
-    // Set the new song
-    audio.src = song.url;
-    audio.load(); // Load the new audio file
-
-    // Play the new song if already playing
-    if (musicPlaying) {
-      clearInterval(progressInterval);
-      toggleMusic();
-      toggleMusic();
-    }
-  }
-
-  // Open window functionality (for your OS-like interface)
-  function openWindow(id) {
-    document.getElementById(id).style.display = 'flex';
-  }
-
-  // Close window functionality
-  function closeWindow(id) {
-    document.getElementById(id).style.display = 'none';
-  }
-
-  // Login functionality (for your OS-like interface)
-  function login() {
-    document.getElementById('loginScreen').style.display = 'none';
-    document.getElementById('desktop').style.display = 'flex';
-  }
-
-  // Drag window functionality for your OS interface
-  function dragStart(e, windowEl) {
-    let shiftX = e.clientX - windowEl.getBoundingClientRect().left;
-    let shiftY = e.clientY - windowEl.getBoundingClientRect().top;
-
-    function moveAt(pageX, pageY) {
-      windowEl.style.left = pageX - shiftX + 'px';
-      windowEl.style.top = pageY - shiftY + 'px';
-    }
-
-    function onMouseMove(event) {
-      moveAt(event.pageX, event.pageY);
-    }
-
-    document.addEventListener('mousemove', onMouseMove);
-
-    windowEl.onmouseup = function () {
-      document.removeEventListener('mousemove', onMouseMove);
-      windowEl.onmouseup = null;
-    };
-  }
-
-  // Update clock every second (for the OS interface)
-  setInterval(() => {
-    const now = new Date();
-    const hours = String(now.getHours()).padStart(2, '0');
-    const minutes = String(now.getMinutes()).padStart(2, '0');
-    document.getElementById('clock').textContent = `${hours}:${minutes}`;
-  }, 1000);
+window.onload = typeTitle;
 </script>
 
 </body>
