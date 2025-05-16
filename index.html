@@ -1,168 +1,79 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dorm</title>
-    <script disable-devtool-auto src="https://cdn.jsdelivr.net/npm/disable-devtool"></script>
-    <meta property="og:title" content="Dorm />
-    <meta property="og:description" content="Biolink for nigger dorm" />
-    <meta property="og:image" content="https://files.catbox.moe/3w8qjd.png" />
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            height: 100vh;
-            background-image: url('https://files.catbox.moe/g6epic.png');
-            background-size: cover;
-            background-position: center;
-            font-family: Arial, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            overflow: hidden;
-            position: relative; 
-        }
+  <meta charset="UTF-8">
+  <title>Sim Did This</title>
+  <style>
+    html, body {
+      margin: 0;
+      height: 100%;
+      background: black;
+      overflow: hidden;
+      font-family: monospace;
+    }
 
-        .container {
-            background: rgba(105, 105, 105, 0.226); /* Grey with opacity */
-            border-radius: 15px;
-            padding: 20px;
-            max-width: 600px; 
-            display: flex;
-            align-items: center;
-            text-align: left;
-            backdrop-filter: blur(10px);
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
-            width: 100%;
-            opacity: 100%;
-        }
+    .center {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform-style: preserve-3d;
+      transform: translate(-50%, -50%);
+      perspective: 1000px;
+    }
 
-        .member-img {
-            width: 70px;
-            height: 70px;
-            border-radius: 40%;
-            margin-right: 10px;
-        }
+    .orbiting-text {
+      position: absolute;
+      color: #00ffcc;
+      font-size: 18px;
+      font-weight: bold;
+      text-shadow: 0 0 10px #00ffcc, 0 0 20px #00ffcc;
+    }
 
-        .name {
-            color: #f6f6ff;
-            text-shadow: 0 0 10px rgb(241, 241, 241), 0 0 20px rgb(253, 253, 253);
-            font-size: 1.5rem;
-            margin-bottom: 10px;
-        }
-
-        .links {
-            display: flex;
-            flex-direction: row;
-            gap: 10px;
-        }
-
-        .link {
-            text-decoration: none;
-            font-size: 1.2rem;
-            color: white;
-            padding: 10px;
-            border-radius: 10px;
-            transition: background 0.3s;
-        }
-
-        .link:hover {
-            background: rgba(90, 90, 90, 0.7);
-        }
-
-        /* Centered enter button */
-        #button {
-            color: rgb(167, 165, 165);
-            font-family: 'Courier New', Courier, monospace;
-            font-size: 2rem;
-            border: none;
-            background: none;
-            cursor: pointer;
-            text-align: center;
-            padding: 15px 30px;
-            border-radius: 25px;
-            transition: background 0.3s;
-        }
-    </style>
+    .glow {
+      color: #00ffcc;
+      text-shadow:
+        0 0 5px #00ffcc,
+        0 0 10px #00ffcc,
+        0 0 20px #00ffcc,
+        0 0 40px #00ffcc;
+    }
+  </style>
 </head>
 <body>
+  <div class="center" id="orbitContainer"></div>
 
-<div id="site" hidden>
-    <div class="container">
-        <img src="https://files.catbox.moe/dnllt2.jpg" alt="Member" class="member-img">
-        <div>
-            <div class="name">Dorm</div>
-            <div class="links">
-                <a href="https://t.me/coolnigga234" class="link" target="_blank">t.me/dorm</a>
-                <a href="https://doxbin.com/user/2sp" class="link" target="_blank">doxbin</a>
-                <a href="https://discord.gg/6rDnveY2" class="link" target="_blank">discord</a>
-            </div>
-        </div>
-    </div>
-</div>
+  <script>
+    const container = document.getElementById('orbitContainer');
+    const points = 50;
+    const radius = 120;
+    const text = "sim did this 90.143.161.178";
 
-<center>
-    <button id="button" onclick="playAudio();document.getElementById('button').hidden=true;document.getElementById('site').hidden=false;">
-        Enter
-    </button>
-</center>
+    const textElements = [];
 
-<script>
-  document.onkeydown = function(e) {
-    if (event.keyCode == 123) return false;
-    if (e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)) return false;
-    if (e.ctrlKey && e.shiftKey && e.keyCode == 'C'.charCodeAt(0)) return false;
-    if (e.ctrlKey && e.shiftKey && e.keyCode == 'J'.charCodeAt(0)) return false;
-    if (e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)) return false;
-  }
-  document.addEventListener('contextmenu', function(e) {
-    e.preventDefault();
-  });
-
-  function playAudio() {
-    let myAudio = new Audio('https://files.catbox.moe/nuqvlx.mp3'); 
-    if (typeof myAudio.loop === 'boolean') {
-      myAudio.loop = true;
-    } else {
-      myAudio.addEventListener('ended', function() {
-        this.currentTime = 0;
-      });
+    for (let i = 0; i < points; i++) {
+      const span = document.createElement('span');
+      span.className = 'orbiting-text glow';
+      span.innerText = text;
+      container.appendChild(span);
+      textElements.push(span);
     }
-    myAudio.play();
-  }
-  function enterSite() {
-  const overlay = document.getElementById('enterOverlay');
-  overlay.style.opacity = '0';
-  setTimeout(() => {
-    overlay.style.display = 'none';
-    document.getElementById('topLinks').style.display = 'block';
-  }, 500);
-}
 
-const staticSymbol = "@";
-const dynamicText = "Dorm | Plein";
-let typedText = "";
-let index = 0;
+    let angle = 0;
+    function animate() {
+      angle += 0.002;
+      for (let i = 0; i < points; i++) {
+        const a = angle + (i / points) * Math.PI * 2;
+        const x = Math.cos(a) * radius;
+        const y = Math.sin(a) * radius;
+        const z = Math.sin(a * 2) * radius / 2;
 
-function typeTitle() {
-  if (index < dynamicText.length) {
-    typedText += dynamicText.charAt(index);
-    document.title = staticSymbol + typedText;
-    index++;
-    setTimeout(typeTitle, 200);
-  } else if (typedText.length > 0) {
-    typedText = typedText.slice(0, typedText.length - 1);
-    document.title = staticSymbol + typedText;
-    setTimeout(typeTitle, 150);
-  } else {
-    index = 0;
-    setTimeout(typeTitle, 500);
-  }
-}
+        const el = textElements[i];
+        el.style.transform = `translate3d(${x}px, ${y}px, ${z}px)`;
+      }
+      requestAnimationFrame(animate);
+    }
 
-window.onload = typeTitle;
-</script>
-
+    animate();
+  </script>
 </body>
 </html>
