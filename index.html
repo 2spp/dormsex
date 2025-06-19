@@ -1,38 +1,31 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Dorm</title>
+  <title>Dorm Music Player</title>
   <link rel="stylesheet" href="style.css" />
-  <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet" />
 </head>
 <body>
-
-  <canvas id="rain-canvas"></canvas>
-
-  <div class="card">
-    <img src="img/bannerc.png" alt="Banner" class="banner" />
-    <div class="username-wrapper">
-      <img class="pfp" src="img/pfp.png" alt="pfp" />
-      <img src="img/sparkle_white.gif" alt="sparkle" class="sparkle" />
-      <h1 class="username flicker">Dorm</h1>
-    </div>
-    <div class="links flicker">
-      <a href="https://t.me/coolnigga234" target="_blank" rel="noopener noreferrer">t.me/dorm</a>
-      <a href="https://discord.gg/CTcCtA33" target="_blank" rel="noopener noreferrer">Dc/dorm</a>
-    </div>
-  </div>
-
-  <!-- Music Player -->
   <div class="music-player">
-    <button id="prev">&#9664;</button>
-    <button id="play">&#9654;</button>
-    <button id="next">&#9654;&#9654;</button>
-    <span id="song-title">Loading...</span>
-    <audio id="audio" src="music/song1.mp3"></audio>
+    <img id="album-art" src="img/album1.jpg" alt="Album Art" />
+    <div class="controls">
+      <button id="shuffle"><img src="icons/shuffle.svg" alt="Shuffle" /></button>
+      <button id="prev"><img src="icons/prev.svg" alt="Previous" /></button>
+      <button id="play"><img src="icons/play.svg" alt="Play" /></button>
+      <button id="next"><img src="icons/next.svg" alt="Next" /></button>
+      <button id="repeat"><img src="icons/repeat.svg" alt="Repeat" /></button>
+    </div>
+    <div class="song-info">
+      <span id="song-title">Loading...</span>
+      <span id="song-artist">...</span>
+    </div>
+    <div class="volume">
+      <button id="volume-btn"><img id="volume-icon" src="icons/volume.svg" alt="Volume" /></button>
+    </div>
+    <audio id="audio" preload="auto"></audio>
   </div>
-
   <script src="script.js"></script>
 </body>
 </html>
